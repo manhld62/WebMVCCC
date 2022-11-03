@@ -1,0 +1,58 @@
+﻿@page "/admin/members"
+@model RaZorWebxxx.Areas.Admins.Pages.User.IndexModel
+
+
+
+@{
+
+    ViewData["Title"] = "Danh Sách Các Thành Viên";
+}
+<h2>@ViewData["Title"]</h2>
+<partial name="_Statusmessage" model="@Model.Statusmessage"></partial>
+<p>Tổng số Thành Viên : @Model.totalUsers</p>
+
+<table class="table">
+    <tr>
+        <th>Tên User</th>
+        <th>Vai Trò</th>
+        <th>Tác Vụ </th>
+    </tr>
+    @foreach (var users in Model.users)
+    {
+        <tr>
+
+            <td>@users.UserName</td>
+            <td>
+                @if (String.IsNullOrEmpty(users.Rolenames))
+                {
+                    <a  class="text-dark"asp-page="./AddRole" asp-route-id="@users.Id">Thêm Roles</a>
+                }
+                else
+                {
+                    <a class="btn btn-success btn-sm" asp-page="./AddRole" asp-route-id="@users.Id">@users.Rolenames</a>
+
+                }
+
+            </td>
+            <td>
+               
+                <a class="btn btn-success btn-sm" asp-page="./SetPassword" asp-route-id="@users.Id">Đặt Mật Khẩu</a>
+            </td>
+        </tr>
+    }
+</table>
+@{
+
+    var pagingmodel = new XTL.Helpers.PagingModel()
+    {
+        currentpage = Model.currentpage,
+        countpage = Model.countpage,
+        generateUrl = (int? p) => Url.Page("./Index", new { p = p })
+
+
+
+    };
+}
+
+
+<partial name="_PagingXTL" model="@pagingmodel" />

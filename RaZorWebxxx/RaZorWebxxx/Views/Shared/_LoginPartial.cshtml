@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using RaZorWebxxx.Models
+@inject SignInManager<AppUser> SignInManagerr
+@inject UserManager<AppUser> UserManagerr
+@{ 
+    //SignInManager.IsSignedIn(User)
+    //UserManagerr.GetUserName(User)
+}
+
+
+
+
+
+<ul class="navbar-nav">
+    @if (SignInManagerr.IsSignedIn(User))
+    {
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index">Xin Chào @UserManagerr.GetUserName(User)</a>
+</li>
+                <li class="nav-item">
+                    <a class="nav-link  text-dark" asp-area="Identity" asp-page="/Account/Logout">Đăng Xuất</a>
+                </li>
+ }
+            else
+            {
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index">Xin Chào @UserManagerr.GetUserName(User)</a>
+</li>
+<li class="nav-item">
+    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+        <button type="submit" class="nav-link btn btn-link text-dark"  >Đăng xuất</button>
+    </form>
+</li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Đăng Ký</a>
+                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link  text-dark" asp-area="Identity" asp-page="/Account/Login">Đăng Nhập</a>
+                                                </li>
+}
+</ul>
+

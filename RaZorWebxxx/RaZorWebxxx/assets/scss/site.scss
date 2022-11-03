@@ -1,0 +1,70 @@
+﻿body{
+    background:#fff;
+    color:#1d1d1f;
+    
+
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 61px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+.app-navbar{
+    background:#122153;
+    .text-dark{
+        color:#b9c3ce !important;
+        &:hover{
+            color:white !important;
+        }
+    }
+    .navbar-brand{
+        color:white;
+         &:hover{
+            color:#d727da !important;
+        }
+    }
+    .dropdown-toggle{
+        border-color:#a562ad;
+        color:silver;
+    }
+}
+.categorysidebar {
+    ul, li {
+        list-style: none;
+        padding-left: 10px;
+    }
+
+    a {
+        text-decoration: none;
+
+        &:hover {
+            color: red;
+        }
+
+
+    }
+    >ul>li>a{font-weight:bold}
+    h3{
+        text-transform:uppercase;
+        font-size:1.3em;
+        border-bottom:1px solid blue;
+        padding-bottom:10px;
+    }
+}
+@import "contact";
+@import "_footer.scss";
+@import "_products.scss";

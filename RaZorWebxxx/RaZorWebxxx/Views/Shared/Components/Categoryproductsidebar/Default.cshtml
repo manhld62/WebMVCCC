@@ -1,0 +1,46 @@
+﻿@using RaZorWebxxx.Views.Shared.Components
+@model RaZorWebxxx.Views.Shared.Components.Categorysidebar.Categoryproductsidebar.CategorysidebarData
+@{
+    int level = Model.level;
+
+}
+@if (Model.Categories.Count > 0)
+{
+
+
+
+    @if (level == 0)
+    {
+        @Html.Raw("<div class=\"categorysidebar\">");
+<h3>        <a asp-controller="ViewPost" asp-action="Index" asp-route-categoryslug=""> Danh Mục Sản Phẩm</a></h3>
+    }
+
+    <ul>
+        @foreach (var category in Model.Categories)
+        {
+            var cssactive = (category.Slug == Model.categoryslug) ? "active" : null;
+            <li>
+                <a class="@cssactive"   asp-controller="ViewProduct" asp-action="Index" asp-route-categoryslug="@category.Slug"> @category.Title</a>
+                @if (category.CategoryChildren?.Count > 0)
+                {
+                  @await Component.InvokeAsync("RaZorWebxxx.Views.Shared.Components.Categorysidebar.Categoryproductsidebar", new RaZorWebxxx.Views.Shared.Components.Categorysidebar.Categoryproductsidebar.CategorysidebarData()
+    {
+    Categories = category.CategoryChildren.ToList(),
+    level = level + 1,
+    categoryslug = ViewBag.categoryslug
+
+
+    }
+    )
+                }
+
+            </li>
+        }
+    </ul>
+    @if (level == 0)
+    {
+        @Html.Raw("</div >");
+    }
+
+
+}

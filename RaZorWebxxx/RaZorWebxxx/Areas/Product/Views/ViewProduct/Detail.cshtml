@@ -1,0 +1,66 @@
+﻿@using RaZorWebxxx.Models.Product
+@using  RaZorWebxxx.Views.Shared.Components.Categorysidebar
+@model ProducModel
+@{
+    List<Categoryproduct> categories = ViewBag.categories as List<Categoryproduct>;
+    Categoryproduct category = ViewBag.category as Categoryproduct;
+    ViewData["Title"] = Model.Title;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="~/">Home</a></li>
+        @if (category != null)
+        {
+            var li = category.ListParents();
+            foreach (var l in li)
+            {
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-route-categoryslug="@l.Slug">@l.Title</a>
+                </li>
+            }
+            <li class="breadcrumb-item">
+                <a asp-action="Index" asp-route-categoryslug="@category.Slug">@category.Title</a>
+            </li>
+        }
+    </ol>
+</nav>
+
+
+
+
+
+<div class="detailpost">
+    <h1>@Model.Title</h1>
+    <div class="sapo">@Model.Description</div>
+    <div>
+        <p>Giá :<strong>@Model.Price</strong></p>
+        <a asp-action="AddtoCart" asp-route-productid="@Model.ProductId" class="btn btn-danger">Đặt Hàng</a>
+       
+
+    </div>
+   @if (Model.Photos.Any())
+            {
+                <div class="d-flex flex-wrap">
+                    @foreach(var photo in Model.Photos)
+                {
+                    <img class="w-50" src="/contents/Products/@photo.FileName" />
+                }
+                </div>
+            }
+    <hr />
+    @Html.Raw(Model.Content)
+
+
+</div>
+
+@section Sidebar{
+    @await Component.InvokeAsync("RaZorWebxxx.Views.Shared.Components.Categorysidebar.Categoryproductsidebar", new Categoryproductsidebar.CategorysidebarData()
+{
+    Categories = categories,
+    level = 0,
+    categoryslug = ViewBag.categoryslug
+
+
+}
+    )
+}

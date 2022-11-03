@@ -1,0 +1,10 @@
+﻿ @inject RaZorWebxxx.Services.Plainetservice plainet
+<h1>Các hành tinh trong hệ mặt trời</h1>
+<div class="list-group">
+    @foreach (var plain in plainet)
+    {
+        <a class="list-group-item list-group-item-action"    asp-action="@plain.Name">
+            @plain.VnName -@plain.Name
+        </a>
+    }
+</div>

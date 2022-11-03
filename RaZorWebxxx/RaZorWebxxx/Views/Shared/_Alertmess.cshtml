@@ -1,0 +1,27 @@
+﻿@{ 
+    var mess = TempData["Statusmessage"] as string;
+}
+
+
+
+
+@if (!string.IsNullOrEmpty(mess))
+{
+    <div class="alert alert-primary" role="alert">
+        @mess
+    </div>
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
